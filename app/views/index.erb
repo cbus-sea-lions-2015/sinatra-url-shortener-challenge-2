@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Welcome to Grandma's URL Shortener!</h1>
+  <p>Enter a URL to shorten</p>
+
+  <form action="/urls" method="POST">
+    <input type="text" name="input"></input><input type="submit" value="Go!"></input>
+  </form>
+  
+  <% if @errors %>
+    <p class="error">Grandma says: "INVALID URL, SONNY"</p>
+  <% end %>
+  
+  <table>
+    <th colspan="3">Our Shortened URLs</th>
+    <tr>
+      <td>Long</td>
+      <td>Short</td>
+      <td>Hits</td>
+    </tr>
+    <% @all_urls.each do |url| %>
+    <tr>
+      <td><%= url.original_url %></td>
+      <td><a href="<%= url.short_url %>"><%= url.short_url %></a></td>
+      <td><%= url.click_counter %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
