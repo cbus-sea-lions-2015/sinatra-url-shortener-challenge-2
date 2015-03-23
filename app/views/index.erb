@@ -1,0 +1,52 @@
+<div class="container">
+  <h1 class="jumbotron">Welcome to Sinatra!</h1>
+  <p>Hello, world!</p>
+
+  <table>
+    <tr>
+      <th>File Description</th>
+      <th>File Location</th>
+    </tr>
+    <tr>
+      <td>This view file</td>
+      <td><code><%= __FILE__.gsub(Sinatra::Application.root, '') %></code></td>
+    </tr>
+    <tr>
+      <td>The layout file</td>
+      <td><code><%= File.expand_path('../layout.erb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
+    </tr>
+    <tr>
+      <td>The current controller</td>
+      <td><code><%= File.expand_path('../../controllers/index.rb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
+    </tr>
+  </table>
+  
+  <form action="/urls" method="post" class="form-inline">
+  <div class="form-group">
+    <input type="text" name="long_url" placeholder="give me long url" class="form-control">
+    <input type="submit" value="Shorten Url" class="btn btn-primary">
+  </div>
+  </form>
+  
+  <% if flash[:notice].nil? == false %>
+   <h4> Here is your new url:  <%= flash[:notice] %> </h4>
+  <% end %>
+
+   <% if @all_urls.nil? == false %>
+   <table class="table table-striped table-bordered">
+     <tr>
+       <th> Long Url </th>
+       <th> Short Url </th>
+       <th> Hit Count </th>
+     </tr>
+     <% @all_urls.each do |url| %>
+      <tr>
+       <td> <%= url.long_url %> </td>
+       <td> <%= url.short_url %> </td>
+       <td> <%= url.clicks %> </td>
+     </tr>
+     <% end %>
+   </table>
+  <% end %>
+  
+</div>
